@@ -1,21 +1,18 @@
-FROM centos:latest
+FROM openjdk:8-jre-alpine
+LABEL maintainer="tomasq@gmail.com"
 
-LABEL maintainer "tomasq@gmail.com"
-LABEL image "minecraft_dev"
+ARG BUILD_DATE
+ARG MC_VERSION
 
-ARG MC_VERSION=1.15.2
-LABEL version=${MC_VERSION}
 
-RUN set -x; \
-dnf upgrade -y; \
-dnf install -y java-1.8.0-openjdk jq curl; \
-dnf clean all
-
-VOLUME /data
+ENV EULA=true
 
 WORKDIR /app
 
-COPY server.jar minecraft_server.jar
+RUN set -x; \
+apk --no-cache add curl jq; \
+
+
 COPY config /app/
 
 RUN set -x; \
@@ -23,8 +20,8 @@ ln -s /data/logs /app/logs; \
 ln -s /data/world /app/world; \
 ln -s /data/whitelist.json /app/whitelist.json
 
-EXPOSE 25565/tcp
+VOLUME /data
 
-ENV EULA=true
+EXPOSE 25565/tcp
 
 ENTRYPOINT [ "/app/minecraft.sh" ]
