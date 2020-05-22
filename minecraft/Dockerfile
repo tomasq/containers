@@ -26,7 +26,7 @@ RUN set -x; \
     && latest_download_url=$(curl -fsSL "$latest_version_url" | jq -r ".downloads.server.url") \
     && curl -fsSL "$latest_download_url" -o minecraft_server.jar \
     && apk --no-cache del curl jq \
-  else \
+  ; else \
     target_version_url=$(curl -fsSL https://launchermeta.mojang.com/mc/game/version_manifest.json \
     | jq -r --arg MC_VERSION "$MC_VERSION" '.versions[] | select(.id==$MC_VERSION) | .url') \
     && target_download_url=$(curl -fsSL "$target_version_url" | jq -r ".downloads.server.url") \
