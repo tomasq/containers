@@ -35,8 +35,10 @@ RUN set -x; \
   ; fi 
 
 RUN set -x; \
-  if [[ ! -d logs ]]; then ln -s /data/logs /app/logs; fi; \
-  if [[ ! -d world ]]; then ln -s /data/world /app/world; fi; \
+  if [[ ! -d /data/logs ]]; then mkdir -p /data/logs; fi; \
+  if [[ ! -d /data/world ]]; then mkdir -p /data/world; fi; \
+  if [[ ! -L logs ]]; then ln -s /data/logs /app/logs; fi; \
+  if [[ ! -L world ]]; then ln -s /data/world /app/world; fi; \
   if [[ ! -f whitelist.json ]]; then ln -s /data/whitelist.json /app/whitelist.json; fi; \
   echo "eula=true" > eula.txt
 
