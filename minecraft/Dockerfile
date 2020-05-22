@@ -47,7 +47,7 @@ VOLUME /data
 EXPOSE 25565/tcp
 
 ENV INIT_MEM=1G \
-	MAX_MEM=4G \
-	SERVER_JAR=/app/minecraft_server.jar
+	  MAX_MEM=4G \
+	  SERVER_JAR=/app/minecraft_server.jar
 
-ENTRYPOINT [ "java", "-Xms${INIT_MEM}", "-Xmx${MAX_MEM}", "-jar ${SERVER_JAR}", "nogui" ]
+ENTRYPOINT java -Xms${INIT_MEM} -Xmx${MAX_MEM} -jar ${SERVER_JAR} nogui
