@@ -50,4 +50,4 @@ ENV INIT_MEM=1G \
 	SERVER_JAR=/app/minecraft_server.jar \
 	EULA=true
 
-ENTRYPOINT [ "java", "-Xms${INIT_MEM}", "-Xmx${MAX_MEM}", "-jar ${SERVER_JAR}", "nogui" ]
+ENTRYPOINT java -Xms${INIT_MEM} -Xmx${MAX_MEM} -jar ${SERVER_JAR} nogui
