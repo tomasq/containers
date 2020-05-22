@@ -34,12 +34,12 @@ RUN set -x; \
     && apk --no-cache del curl jq \
   ; fi 
 
-COPY config /app/
-
 RUN set -x; \
 ln -s /data/logs /app/logs; \
 ln -s /data/world /app/world; \
 ln -s /data/whitelist.json /app/whitelist.json
+
+COPY config /app/
 
 VOLUME /data
 
