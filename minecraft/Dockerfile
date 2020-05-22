@@ -20,7 +20,7 @@ WORKDIR /app
 
 RUN set -x; \
   apk --no-cache add curl jq; \
-  if [[ ! -z "$MC_VERSION" ]] || [[ "$MC_VERSION" -eq "latest" ]]; then \
+  if [[ -z "$MC_VERSION" ]] || [[ "$MC_VERSION" = "latest" ]]; then \
     latest_version_url=$(curl -fsSL https://launchermeta.mojang.com/mc/game/version_manifest.json \
     | jq -r '.latest.release as $latest_release | .versions[] | select(.id == $latest_release) | .url') \
     && latest_download_url=$(curl -fsSL "$latest_version_url" | jq -r ".downloads.server.url") \
