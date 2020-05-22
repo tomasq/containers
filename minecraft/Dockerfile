@@ -35,9 +35,10 @@ RUN set -x; \
   ; fi 
 
 RUN set -x; \
-ln -s /data/logs /app/logs; \
-ln -s /data/world /app/world; \
-ln -s /data/whitelist.json /app/whitelist.json
+  if [[ ! -d logs ]]; then ln -s /data/logs /app/logs; fi; \
+  if [[ ! -d world ]]; then ln -s /data/world /app/world; fi; \
+  if [[ ! -f whitelist.json ]]; then ln -s /data/whitelist.json /app/whitelist.json; fi \
+  echo "TRUE" > eula.txt
 
 COPY config /app/
 
@@ -47,7 +48,6 @@ EXPOSE 25565/tcp
 
 ENV INIT_MEM=1G \
 	MAX_MEM=4G \
-	SERVER_JAR=/app/minecraft_server.jar \
-	EULA="TRUE"
+	SERVER_JAR=/app/minecraft_server.jar
 
-ENTRYPOINT java -Xms${INIT_MEM} -Xmx${MAX_MEM} -jar ${SERVER_JAR} nogui
+ENTRYPOINT [ "java", "-Xms${INIT_MEM}", "-Xmx${MAX_MEM}", "-jar ${SERVER_JAR}", "nogui" ]
