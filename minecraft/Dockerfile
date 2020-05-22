@@ -38,7 +38,7 @@ RUN set -x; \
   if [[ ! -d logs ]]; then ln -s /data/logs /app/logs; fi; \
   if [[ ! -d world ]]; then ln -s /data/world /app/world; fi; \
   if [[ ! -f whitelist.json ]]; then ln -s /data/whitelist.json /app/whitelist.json; fi; \
-  echo "TRUE" > eula.txt
+  echo "eula=true" > eula.txt
 
 COPY config /app/
 
