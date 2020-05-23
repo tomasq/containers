@@ -19,7 +19,7 @@ LABEL org.label-schema.docker.cmd="docker run -d --rm -p \
 WORKDIR /app
 
 RUN set -x; \
-  apk --no-cache add curl jq; \
+  apk --no-cache add curl jq tzdata; \
   if [[ -z "$MC_VERSION" ]] || [[ "$MC_VERSION" = "latest" ]]; then \
     latest_version_url=$(curl -fsSL https://launchermeta.mojang.com/mc/game/version_manifest.json \
     | jq -r '.latest.release as $latest_release | .versions[] | select(.id == $latest_release) | .url') \
