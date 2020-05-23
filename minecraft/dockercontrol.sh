@@ -21,7 +21,7 @@ function build_container() {
 }
 
 function start_container() {
-    docker run -d --rm \
+    docker run -d -it --rm \
     --memory="5g" \
     --cpus="2" \
     -p 25565:25565 \
