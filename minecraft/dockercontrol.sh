@@ -26,7 +26,7 @@ function start_container() {
     --name "$CONTAINER_NAME" \
     --memory="5g" \
     --cpus="2" \
-    -e TZ=America/New_York \
+    -e "TZ=America/New_York" \
     -p 25565:25565 \
     -v minecraft_data:/data \
     "$IMAGE_NAME"
